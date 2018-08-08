@@ -158,11 +158,16 @@ public function update($id=''){
 
 $id=$this->input->post('staff_id',true);
 
+  }else{
+
+      $id=decryptInUrl($id);
   }
 
-  $id=decryptInUrl($id);
 
-  
+
+
+
+
 
 
 
@@ -187,28 +192,76 @@ $id=$this->input->post('staff_id',true);
                 }else{
 
 
-// $daya=password_verify($datastaff->password,$this->input->post('password',true));
+      $first_name=  $this->input->post('first_name', TRUE);
+      $last_name= $this->input->post('last_name', TRUE);
+      $username=  $this->input->post('username', TRUE);
+      $password=  $this->input->post('password', TRUE);
+      $emailuser= $this->input->post('emailuser', TRUE);
 
-dprint($datastaff->password);
-dprint($this->input->post('password',true));
+      $data=[
+          'first_name'=>$first_name,
+          'last_name'=>$last_name,
+          'username'=>$username,
+          'email'=>$emailuser
 
-                if($datastaff->password==$this->input->post('password',true)){
+      ];
 
-                    echo 'sama';
-
-                }
-
-
-
+      if($password!=$datastaff->password){
 
 
-                }
+        $data['password']=password_hash($password,PASSWORD_DEFAULT);
+
+      }
+
+
+
+
+
+      $this->db->set($data);
+       $this->db->where('staff_id',$id);
+        $this->db->update('staff',$data);
+
+redirect('admin/staffAdmin/detailstaff/'.$id);
+
+
+
+// dprint($datastaff->password);
+// dprint($this->input->post('password',true));
+
+                // if($datastaff->password==$this->input->post('password',true)){
+
+                //     echo 'sama';
+
+
+
+                // }
+
+
+
+
+
+                 }
 
 
 
 
 
      
+
+}
+
+
+public function delete($id){
+
+  $id=decryptInUrl($id);
+
+  $this->db->delete('staff',"staff_id=$id");
+
+      $this->session->set_flashdata('statusadd','telah berjaya padam');
+
+  redirect('admin/staffAdmin/index');
+
+
 
 }
 

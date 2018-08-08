@@ -16,9 +16,9 @@ foreach ($stafflist as $row) {
 <td><?=$row->username?></td>
 <td>
 
+<a aria-pressed="true" type="button" href="<?=site_url('admin/staffAdmin/update/'.encryptInUrl($row->staff_id))?>" class="btn btn-info" ></i> View</a>
 <a aria-pressed="true" type="button" href="<?=site_url('admin/staffAdmin/update/'.encryptInUrl($row->staff_id))?>" class="btn btn-info" ></i> Edit</a>
-<button type="button" class="btn btn-light" >Light</button>
-<button type="button" class="btn btn-dark" >Dark</button>
+<a aria-pressed="true" type="button" href="<?=site_url('admin/staffAdmin/delete/'.encryptInUrl($row->staff_id))?>" class="btn btn-info btndelete" ></i> Delete</a>
 
 </td>
 
@@ -28,3 +28,48 @@ foreach ($stafflist as $row) {
 
 ?>
 </table>
+
+<script type="text/javascript">
+	
+$(document).ready(function(){
+
+
+    $(".btndelete").click(function(e){
+
+        e.preventDefault();
+
+swal({
+  title: "Anda Pasti?",
+  text: "sekali delete tiada lagi",
+  icon: "warning",
+  buttons: true,
+  dangerMode: true,
+})
+.then((willDelete) => {
+  if (willDelete) {
+
+
+
+        window.location=$(this).attr('href');
+    swal("Poof! Your imaginary file has been deleted!", {
+      icon: "success",
+    });
+
+
+  } else {
+    swal("Your imaginary file is safe!");
+  }
+});
+
+
+
+       
+
+
+    });
+
+
+});
+
+</script>
+
