@@ -154,12 +154,40 @@ public function __construct(){
 
 public function update($id){
 
-         $d['staffdetail']=$this->M_staff->get_detail_staff($id);
+  
+
+    $d['staffdetail']=$this->M_staff->get_detail_staff($id);
           
             $d['title']='detail staff';
 
+
+  $this->form_validation->set_rules('emailuser', 'Email staff', 'required|valid_email');
+      $this->form_validation->set_rules('username', 'Usernama', 'required|callback_checkusername');
+
+
+      $this->form_validation->set_message('required', 'Sila isi %s');
+
+
+      if ($this->form_validation->run() == FALSE)
+                {
+
       $d['content_main']=$this->load->view('staffadmin/update',$d,true);
       $this->load->view('template_main',$d);
+
+                }else{
+
+
+                  dprint($_POST);
+
+
+
+                }
+
+
+
+
+
+     
 
 }
 

@@ -1,8 +1,16 @@
 
+<?php
+
+dprint($staffdetail);
+
+?>
 
 
+<?php echo form_open('admin/staffAdmin/update',['id'=>'formadd']); ?>
+<?php
+echo form_hidden('staff_id', $staffdetail->staff_id);
+?>
 
-<?php echo form_open('admin/staffAdmin/add_staff',['id'=>'formadd']); ?>
 <div class="form-group">
     <label for="email">first name:</label>
     <?php
@@ -13,7 +21,7 @@
         'name'  => 'first_name',
         'id'    => 'first_name',
         'class' => 'form-control',
-        'value'=>$staffdetail[0]->first_name
+        'value'=>$staffdetail->first_name
 );
 
 echo form_input($datafirst_name);
@@ -32,7 +40,7 @@ echo form_error('first_name');
         'name'  => 'last_name',
         'id'    => 'last_name',
         'class' => 'form-control',
-        'value'=>set_value('last_name')
+        'value'=>$staffdetail->last_name
 );
 
 echo form_input($datalast_name);
@@ -52,7 +60,7 @@ echo form_error('last_name');
         'name'  => 'emailuser',
         'id'    => 'emailuser',
         'class' => 'form-control',
-        'value'=>set_value('emailuser')
+        'value'=>$staffdetail->email
 );
 
 echo form_input($dataemail);
@@ -71,7 +79,7 @@ echo form_error('emailuser');
         'name'  => 'username',
         'id'    => 'username',
         'class' => 'form-control',
-        'value'=>set_value('username')
+        'value'=>$staffdetail->username
 );
 
 echo form_input($datausername);
@@ -90,7 +98,7 @@ echo form_error('username');
         'name'  => 'password',
         'id'    => 'password',
         'class' => 'form-control',
-        'value'=>set_value('password')
+        'value'=>$staffdetail->password
 );
 
 echo form_input($datapassword);

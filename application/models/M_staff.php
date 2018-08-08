@@ -23,7 +23,7 @@ function get_detail_staff($staff_id){
 
 
 		if($query->num_rows() > 0){
-			return $query->result();
+			return $query->row();
 		}
 
 

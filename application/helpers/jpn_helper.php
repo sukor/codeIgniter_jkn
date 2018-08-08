@@ -10,6 +10,17 @@ function test_date($date){
 
 }
 
+function dprint($d){
+echo "<pre>";
+print_r($d);
+echo "</pre>";
+}
+
+
+
+
+
+
 
 
 
