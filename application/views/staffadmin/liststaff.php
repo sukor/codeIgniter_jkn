@@ -16,7 +16,7 @@ foreach ($stafflist as $row) {
 <td><?=$row->username?></td>
 <td>
 
-<a type="button" href="<?=site_url('admin/staffAdmin/update/'.$row->staff_id)?>" class="btn btn-info" ></i> Edit</a>
+<a aria-pressed="true" type="button" href="<?=site_url('admin/staffAdmin/update/'.encryptInUrl($row->staff_id))?>" class="btn btn-info" ></i> Edit</a>
 <button type="button" class="btn btn-light" >Light</button>
 <button type="button" class="btn btn-dark" >Dark</button>
 

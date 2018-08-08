@@ -79,7 +79,7 @@ public function __construct(){
       ];
 
     
-
+//PASSWORD_BCRYPT
       
 
       if($this->db->insert('staff',$data)){
@@ -152,11 +152,21 @@ public function __construct(){
         }
 
 
-public function update($id){
+public function update($id=''){
+
+  if(empty($id)){
+
+$id=$this->input->post('staff_id',true);
+
+  }
+
+  $id=decryptInUrl($id);
 
   
 
-    $d['staffdetail']=$this->M_staff->get_detail_staff($id);
+
+
+   $datastaff= $d['staffdetail']=$this->M_staff->get_detail_staff($id);
           
             $d['title']='detail staff';
 
@@ -177,7 +187,18 @@ public function update($id){
                 }else{
 
 
-                  dprint($_POST);
+// $daya=password_verify($datastaff->password,$this->input->post('password',true));
+
+dprint($datastaff->password);
+dprint($this->input->post('password',true));
+
+                if($datastaff->password==$this->input->post('password',true)){
+
+                    echo 'sama';
+
+                }
+
+
 
 
 
