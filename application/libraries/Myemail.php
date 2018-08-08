@@ -1,21 +1,20 @@
 <?php
 
-Myemail class{
+ class Myemail{
 
 
-public function __construct(){
+function __construct(){
+	$this->obj=&get_instance();
+}
 
-		$this->obj=&get_instace();
-
-	}
 
 //sendemailjpn
-	function sendemailjpn(){
+	function sendemailjpn($data){
 
-		$ci=$this->obj;
+	$CI=$this->obj;
 
+$CI->load->library('email'); 
 
-		
 
 if($CI->config->item('smtp_on')){
 		$config['smtp_host']=$CI->config->item('smtp_host');

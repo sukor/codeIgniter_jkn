@@ -9,6 +9,7 @@ public function __construct(){
 		parent::__construct();
 
 		$this->load->model(['M_staff']);
+		
 
 	
 	}
@@ -77,6 +78,18 @@ public function __construct(){
       	$idstaff=$this->db->insert_id();
 
       	$this->session->set_flashdata('statusadd','telah berjaya');
+
+        $datasend=[[
+          'from'=>'sukor.muhammad@gmail.com',
+          'from_name'=>"sukor",
+          'to'=>$emailuser,
+          'cc'=>'test@g.com',
+          'subject'=>'new user',
+          'message'=>'berjaya di tambah'
+
+                  ]];
+
+        $this->myemail->sendemailjpn($datasend);
 
       	redirect('admin/staffAdmin/detailstaff/'.$idstaff);
 
