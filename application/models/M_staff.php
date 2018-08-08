@@ -30,4 +30,24 @@ function get_detail_staff($staff_id){
 	}
 
 
+	function get_list_staff(){
+
+		$this->db->select('*');
+		$this->db->from('staff s');
+		
+	
+
+	
+		$query = $this->db->get();
+
+
+
+		if($query->num_rows() > 0){
+			return $query->result();
+		}
+
+
+	}
+
+
 }

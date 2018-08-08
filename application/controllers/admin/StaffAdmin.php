@@ -17,6 +17,15 @@ public function __construct(){
 		public function index(){
 
 
+
+      $d['stafflist']=$this->M_staff->get_list_staff();
+          
+            $d['title']='list staff';
+
+      $d['content_main']=$this->load->view('staffadmin/liststaff',$d,true);
+      $this->load->view('template_main',$d);
+
+
 		}
 
 
@@ -128,6 +137,8 @@ public function __construct(){
 
 
         public function detailstaff($id){
+
+
 
         	
 
