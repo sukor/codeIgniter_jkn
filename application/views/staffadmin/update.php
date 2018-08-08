@@ -13,7 +13,7 @@
         'name'  => 'first_name',
         'id'    => 'first_name',
         'class' => 'form-control',
-        'value'=>set_value('first_name')
+        'value'=>$staffdetail[0]->first_name
 );
 
 echo form_input($datafirst_name);

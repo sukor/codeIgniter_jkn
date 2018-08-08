@@ -152,6 +152,17 @@ public function __construct(){
         }
 
 
+public function update($id){
+
+         $d['staffdetail']=$this->M_staff->get_detail_staff($id);
+          
+            $d['title']='detail staff';
+
+      $d['content_main']=$this->load->view('staffadmin/update',$d,true);
+      $this->load->view('template_main',$d);
+
+}
+
 
 
 
