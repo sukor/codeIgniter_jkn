@@ -16,6 +16,32 @@ print_r($d);
 echo "</pre>";
 }
 
+function encryptInUrl($str){
+    $CI =& get_instance();
+    $ciphertext = $CI->encryption->encrypt($str);
+    $ciphertext = strtr(
+        $ciphertext,
+        array(
+            '+' => '.',
+            '=' => '-',
+            '/' => '~'
+        )
+    );
+    return $ciphertext;
+}
+function decryptInUrl($ciphertext){
+    $CI =& get_instance();
+    $ciphertext = strtr(
+        $ciphertext,
+        array(
+            '.' => '+',
+            '-' => '=',
+            '~' => '/'
+        )
+    );
+    return $CI->encryption->decrypt($ciphertext);
+}
+
 
 
 
