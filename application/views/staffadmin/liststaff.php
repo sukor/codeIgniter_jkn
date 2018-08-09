@@ -65,6 +65,10 @@ $(document).ready(function(){
 
 $('#book-table').DataTable({
 	 //"pageLength" : 5,
+	 dom: 'Bfrtip',
+        buttons: [
+            'copy', 'csv', 'excel', 'pdf', 'print'
+        ],
 	  "processing": true,
         "serverSide": true,
 
