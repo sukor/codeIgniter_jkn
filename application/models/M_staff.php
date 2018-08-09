@@ -79,13 +79,18 @@ function getstaff($start,$length,$search,$columns){
 
 		foreach ($columns as $row) {
 
-			if($row['searchable']==true){
+			//	print_r($row['searchable']);
+			
+
+			if($row['searchable']=='true'){
 
 				$this->db->or_like($row['name'],$search['value']);
 
 			}
 			# code...
 		}
+
+			
 	}
 	
 	

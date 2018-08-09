@@ -33,6 +33,7 @@ class Audit
         }
 
          $ip_address = getUserIP();
+         
 
 
         if ( $audit_table != 'sessions') {

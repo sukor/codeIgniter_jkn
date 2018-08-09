@@ -1,4 +1,4 @@
-<table  class='table table-striped'>
+<table id='example' class='table table-striped'>
 
 <thead>
 
@@ -56,18 +56,23 @@ foreach ($stafflist as $row) {
 //echo $pagenation;
 ?>
 <script type="text/javascript">
-		$('.page-item').children('a').addClass('page-link');
+	
 $(document).ready(function(){
+
+ $('#example').DataTable();
+
+
 
 $('#book-table').DataTable({
 	 //"pageLength" : 5,
 	  "processing": true,
         "serverSide": true,
+
         "columns": [
     { "name": "first_name" },
     { "name": "email" },
     { "name": "username" },
-        { "name": "" },
+        { "name": "action","searchable": false, },
     ],
         "ajax": {
             url : "<?php echo site_url("admin/staffAdmin/getstaff") ?>",
