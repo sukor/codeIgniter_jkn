@@ -3,6 +3,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class StaffAdmin extends My_Controller {
 
+// https://datatables.net/extensions/buttons/examples/html5/simple.html
+  // https://datatables.net/extensions/buttons/examples/initialisation/export.html
 
 public function __construct(){
 
