@@ -30,11 +30,11 @@ function get_detail_staff($staff_id){
 	}
 
 
-	function get_list_staff(){
+	function get_list_staff($limit, $start){
 
 		$this->db->select('*');
 		$this->db->from('staff s');
-		
+		$this->db->limit($limit, $start);
 	
 
 	
@@ -48,6 +48,82 @@ function get_detail_staff($staff_id){
 
 
 	}
+function get_total(){
+
+		$this->db->select('*');
+		$this->db->from('staff s');
+
+	
+
+	
+		$query = $this->db->get();
+
+
+
+		
+			return $query->num_rows();
+		
+
+
+	}
+
+
+function getstaff($start,$length,$search,$columns){
+
+		$this->db->select('*');
+		$this->db->from('staff s');
+		$this->db->limit($length,$start);
+		
+
+		if(!empty($columns) &&  !empty($search['value'])){
+
+		foreach ($columns as $row) {
+
+			if($row['searchable']==true){
+
+				$this->db->or_like($row['name'],$search['value']);
+
+			}
+			# code...
+		}
+	}
+	
+	
+
+	
+		$query = $this->db->get();
+
+
+
+		if($query->num_rows() > 0){
+			return $query->result();
+		}
+
+
+	}
+
+
+
+
+function check_username($username){
+
+		$this->db->select('*');
+		$this->db->from('staff s');
+		
+		$this->db->where('s.username', $username);
+
+	
+		$query = $this->db->get();
+
+
+
+		if($query->num_rows() > 0){
+			return $query->row();
+		}
+
+
+	}
+
 
 
 }
