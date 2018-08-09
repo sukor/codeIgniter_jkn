@@ -18,10 +18,56 @@ public function __construct(){
 public function login(){
 
 
-	dprint($_POST);
+	$this->form_validation->set_rules('password', 'password', 'required');
+	$this->form_validation->set_rules('username', 'Usernama', 'required');
 
 
-		$this->load->view('useracces/login');
+	$this->form_validation->set_message('required', 'Sila isi %s');
+
+
+			if ($this->form_validation->run() == FALSE)
+                {
+
+
+					$this->load->view('useracces/login');
+				}else{
+
+
+					$username=$this->input->post('username');
+					$password=$this->input->post('password');
+
+					$usernamestatus=$this->M_staff->check_username($username);
+
+					if(!empty($usernamestatus)){
+
+							$statusverify=password_verify($password,$usernamestatus->password);
+
+
+							if($statusverify){
+
+								echo "Betul";
+
+							}else{
+
+								echo "salah";
+							}
+
+
+
+
+
+					}
+
+
+
+
+
+
+
+
+
+
+				}
 
 
 
