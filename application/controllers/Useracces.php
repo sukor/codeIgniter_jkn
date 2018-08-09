@@ -45,25 +45,37 @@ public function login(){
 
 							if($statusverify){
 
-								echo "Betul";
+
+
+				$newdata = array(
+				        'username'  => $usernamestatus->username,
+				        'email'     => $usernamestatus->email,
+				        'logged_in' => TRUE
+				);
+
+
+				
+
+				$this->session->set_userdata($newdata);
+
+				redirect('admin/staffAdmin');
+
+
+
+
+
 
 							}else{
 
-								echo "salah";
+								redirect('useracces/login');
 							}
 
 
 
+					}else{
 
-
+						redirect('useracces/login');
 					}
-
-
-
-
-
-
-
 
 
 
@@ -74,7 +86,18 @@ public function login(){
 }
 
 
+public function logout(){
 
+	// $array_items = array('username', 'email','logged_in');
+
+ //    $this->session->unset_userdata($array_items);
+
+    $this->session->sess_destroy();
+
+	//dprint($this->session->userdata);
+
+	redirect('useracces/login');
+}
 
 
 }
