@@ -15,7 +15,12 @@
 
     <!-- Custom styles for this template -->
     <link href="<?=base_url()?>/assets/css/sticky-footer-navbar.css" rel="stylesheet">
-    <script src="<?=base_url()?>/assets/js/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script> 
+
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.13/datatables.min.css"/>
+    
+<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script> 
   </head>
 
   <body>
@@ -39,10 +44,29 @@
               <a class="nav-link disabled" href="#">Disabled</a>
             </li>
           </ul>
-          <form class="form-inline mt-2 mt-md-0">
-            <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-          </form>
+ <?php
+$datasessionusernama=$this->session->userdata('username');
+
+ ?>
+
+
+
+
+<span class="badge badge-primary"><?php
+echo "Selamat datang $datasessionusernama";
+?></span>
+
+<?php
+$statuslogin=$this->session->userdata('logged_in');
+if($statuslogin==1){
+  ?>
+<a href="<?=site_url('useracces/logout')?>" class="btn btn-info" role="button">Logout</a>
+<?
+}
+
+?>
+
+
         </div>
       </nav>
     </header>

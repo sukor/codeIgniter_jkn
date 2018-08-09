@@ -2,7 +2,7 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 
-class My_Controller extends CI_Controller {
+class MY_Controller extends CI_Controller {
 
 
 
@@ -10,7 +10,8 @@ public function __construct(){
 
 		parent::__construct();
 
-				
+		//	$this->output->cache(10);
+
 		$statuslogin=$this->session->userdata('logged_in');
 		if($statuslogin==1){
 
@@ -21,7 +22,15 @@ public function __construct(){
 			}
 
 
+
+$this->lang->load('message', 'bahasa');
+// $oops = $this->lang->line('message_key');
+
+
 				
 			}
+
+
+
 
 }

@@ -5,8 +5,15 @@ dprint($staffdetail);
 
 ?>
 
+<img src="<?=base_url().'/'.$staffdetail->picture?>" alt="Italian Trulli">
 
-<?php echo form_open('admin/staffAdmin/update',['id'=>'formadd']); ?>
+
+
+<?php echo form_open_multipart('admin/staffAdmin/update',['id'=>'formadd']); ?>
+
+<?php
+echo form_upload('picture');
+?>
 <?php
 echo form_hidden('staff_id', $staffdetail->staff_id);
 ?>

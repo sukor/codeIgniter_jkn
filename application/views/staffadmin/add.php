@@ -1,10 +1,14 @@
 
 
-
+<?php
+echo "test";
+// echo $this->lang->line('welcome_message');
+echo lang('welcome_message') ;
+?>
 
 <?php echo form_open('admin/staffAdmin/add_staff',['id'=>'formadd']); ?>
 <div class="form-group">
-    <label for="email">first name:</label>
+    <label for="email"><?=lang('first name')?>:</label>
     <?php
 
 

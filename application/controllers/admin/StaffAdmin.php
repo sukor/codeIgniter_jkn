@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class StaffAdmin extends CI_Controller {
+class StaffAdmin extends My_Controller {
 
 
 public function __construct(){
@@ -9,7 +9,9 @@ public function __construct(){
 		parent::__construct();
 
 		$this->load->model(['M_staff']);
-		
+   // $this->lang->load('message','bahasa');
+	
+
 
 	
 	}
@@ -17,8 +19,15 @@ public function __construct(){
 		public function index(){
 
 
+        $total_records = $this->M_staff->get_total();
 
-      $d['stafflist']=$this->M_staff->get_list_staff();
+
+      $d['stafflist']=$this->M_staff->get_list_staff($limit_per_page, $start_index);
+
+
+
+
+
           
             $d['title']='list staff';
 
@@ -31,6 +40,7 @@ public function __construct(){
 
 
 		public function add_staff(){
+$this->load->helper('language');  
 
 			// echo "<pre>";
 			// print_r($_POST);
@@ -183,13 +193,42 @@ $id=$this->input->post('staff_id',true);
       $this->form_validation->set_message('required', 'Sila isi %s');
 
 
-      if ($this->form_validation->run() == FALSE)
+            $config['upload_path']= './upload/';
+      $config['allowed_types'] = 'gif|jpg|png';
+      // $config['max_size'] = 100;
+      // $config['max_width'] = 1024;
+      // $config['max_height'] = 768;
+      
+
+       $this->upload->initialize($config);
+
+
+      if ($this->form_validation->run() == FALSE )
                 {
+
+
+
+
+
 
       $d['content_main']=$this->load->view('staffadmin/update',$d,true);
       $this->load->view('template_main',$d);
 
                 }else{
+
+
+
+             if ( ! $this->upload->do_upload('picture')) {
+        $error = array('error' => $this->upload->display_errors());
+        // print_r($error);
+        // die();
+        $statusupload=FALSE;
+      }else{
+
+        $data = array('upload_data' => $this->upload->data());
+      }
+      
+    
 
 
       $first_name=  $this->input->post('first_name', TRUE);
@@ -202,7 +241,9 @@ $id=$this->input->post('staff_id',true);
           'first_name'=>$first_name,
           'last_name'=>$last_name,
           'username'=>$username,
-          'email'=>$emailuser
+          'email'=>$emailuser,
+          'picture'=>'upload/'.$data['upload_data']['file_name'],
+
 
       ];
 
@@ -266,6 +307,47 @@ public function delete($id){
 }
 
 
+
+public function getstaff(){
+
+  
+
+    // Datatables Variables
+          $draw = intval($this->input->get("draw"));
+          $start = intval($this->input->get("start"));
+          $length = intval($this->input->get("length"));
+          $search = $this->input->get("search");
+           $columns = $this->input->get("columns");
+     // dprint($_GET);
+         // $start=empty($start)?10:$start;
+          
+          $books = $this->M_staff->getstaff($start,$length,
+            $search,$columns);
+
+          $data = array();
+
+          foreach($books as $r) {
+            $editbtn=site_url('admin/staffAdmin/update/'.encryptInUrl($r->staff_id));
+            $button='<a aria-pressed="true" type="button" href="'.$editbtn.'" class="btn btn-info" ></i> Edit</a>';
+
+               $data[] = array(
+                    $r->first_name.''.$r->last_name,
+                    $r->email,
+                    $r->username,
+                     $button,
+                  
+               );
+          }
+$total_records = $this->M_staff->get_total();
+          $output = array(
+               "draw" => $draw,
+                 "recordsTotal" => $total_records,
+                 "recordsFiltered" =>  $total_records,
+                 "data" => $data
+            );
+          echo json_encode($output);
+          exit();
+}
 
 
 }
