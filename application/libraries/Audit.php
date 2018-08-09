@@ -24,11 +24,15 @@ class Audit
         $staff_id = 0;
         $ip_address = 0;
 
-        if (sizeof($user) > 0) {
-            $staff_id = $user->id;
-            $ip_address = $user->ip_address;
-            $staff_name = $user->username;
+     $statuslogin=$this->_cd->session->userdata('logged_in');       
+
+        if ($statuslogin==1) {
+            $staff_id = $this->_cd->session->userdata('staff_id');
+           
+            $staff_name = $this->_cd->session->userdata('username');
         }
+
+         $ip_address = getUserIP();
 
 
         if ( $audit_table != 'sessions') {

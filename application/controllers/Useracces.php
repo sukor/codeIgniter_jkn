@@ -48,6 +48,7 @@ public function login(){
 
 
 				$newdata = array(
+					'staff_id'=>$usernamestatus->staff_id,
 				        'username'  => $usernamestatus->username,
 				        'email'     => $usernamestatus->email,
 				        'logged_in' => TRUE
